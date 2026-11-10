@@ -1,0 +1,128 @@
+import os
+import sys
+import time
+import random
+import logging
+import requests
+
+# Configuración estricta de logs para diagnóstico autónomo
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] (Autocorrector) -> %(message)s"
+)
+
+# --- NARRATIVAS DE MARKETING EMOCIONAL ---
+# Enfoque humano, transparente y de código abierto sin presionar la venta
+EMOTIONAL_CAMPAIGNS = [
+    {
+        "id": "sovereignty_01",
+        "copy": (
+            "Behind every clean line of code is a long night of persistence, trial, and unyielding belief "
+            "in digital independence. We don't just build systems; we build solutions that endure. "
+            "If our journey of open-source creation resonates with you, fuel our next breakthrough: "
+            "{donation_url} #BuildInPublic #OpenSource #TechFreedom"
+        )
+    },
+    {
+        "id": "community_02",
+        "copy": (
+            "True innovation is born when individuals refuse to give up, despite the odds. "
+            "No corporate filters, no middlemen—just pure, transparent technology built for the community. "
+            "Be part of this independent movement: "
+            "{donation_url} #CreatorEconomy #IndependentDev #GlobalImpact"
+        )
+    },
+    {
+        "id": "purpose_03",
+        "copy": (
+            "We started from scratch with zero backing, driven entirely by the desire to create the tools "
+            "we wished existed in our hardest moments. Support independent engineering and authentic creation: "
+            "{donation_url} #DevCommunity #FutureTech #Innovation"
+        )
+    }
+]
+
+# Canales o webhooks configurados por entorno con respaldo autónomo
+WEBHOOK_ENDPOINTS = [
+    os.getenv("TARGET_WEBHOOK_1", ""),
+    os.getenv("TARGET_WEBHOOK_2", "")
+]
+
+DONATION_LINK = os.getenv("DONATION_URL", "https://paypal.me/yourlink")
+
+def self_healing_http_request(url, payload, max_retries=3):
+    """
+    Ejecuta peticiones HTTP de forma autónoma con autocorrección,
+    backoff exponencial y reintentos ante fallos de red o caídas de servidor.
+    """
+    if not url or not url.startswith("http"):
+        logging.warning(f"URL inválida o vacía detectada ('{url}'). Omitiendo endpoint de forma segura.")
+        return False
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            logging.info(f"Intento {attempt}/{max_retries} conectando a destino...")
+            response = requests.post(url, json=payload, timeout=12)
+            
+            # Verificación de códigos de estado exitosos
+            if response.status_code in [200, 201, 204]:
+                logging.info("Transmisión completada y verificada con éxito.")
+                return True
+            elif 500 <= response.status_code < 600:
+                logging.warning(f"Error de servidor remoto ({response.status_code}). Autocorrección activada: reintentando...")
+            else:
+                logging.error(f"Respuesta rechazada por el servidor (Código {response.status_code}). Abortando este nodo.")
+                break
+                
+        except requests.exceptions.Timeout:
+            logging.warning(f"Timeout en intento {attempt}. El servidor tardó en responder. Reintentando...")
+        except requests.exceptions.ConnectionError:
+            logging.warning(f"Fallo de conexión de red en intento {attempt}. Verificando estabilidad...")
+        except Exception as e:
+            logging.error(f"Error crítico inesperado en la petición: {e}")
+        
+        # Tiempo de espera adaptativo entre reintentos para evitar bloqueos
+        sleep_time = attempt * 3
+        time.sleep(sleep_time)
+        
+    logging.error("Se agotaron los reintentos para este endpoint. El script continúa operando de forma segura.")
+    return False
+
+def run_autonomous_cazeria():
+    logging.info("--- Iniciando ciclo autónomo de cacería y difusión ---")
+    
+    # Selección inteligente y aleatoria de la campaña emocional
+    selected_campaign = random.choice(EMOTIONAL_CAMPAIGNS)
+    formatted_message = selected_campaign["copy"].format(donation_url=DONATION_LINK)
+    
+    logging.info(f"Estrategia seleccionada -> ID: {selected_campaign['id']}")
+    
+    payload = {
+        "content": formatted_message,
+        "metadata": {
+            "engine": "autonomous_cazerIA",
+            "strategy": "emotional_marketing",
+            "campaign_id": selected_campaign["id"]
+        }
+    }
+    
+    active_endpoints = [ep for ep in WEBHOOK_ENDPOINTS if ep.strip()]
+    
+    if not active_endpoints:
+        logging.info("Modo simulación autónoma: No hay webhooks activos definidos. Copia generada sin errores:")
+        print("\n" + "="*40 + "\n" + formatted_message + "\n" + "="*40 + "\n")
+        return
+
+    for endpoint in active_endpoints:
+        self_healing_http_request(endpoint, payload)
+        # Pausa aleatoria humanizada para mantener perfil orgánico
+        time.sleep(random.randint(4, 9))
+
+if __name__ == "__main__":
+    try:
+        run_autonomous_cazeria()
+        logging.info("--- Ciclo finalizado de forma limpia y sin bloqueos ---")
+    except Exception as fatal_error:
+        # Bloque de seguridad global: evita que un fallo colapse el pipeline de GitHub Actions
+        logging.critical(f"Excepción fatal atrapada por el sistema de autocorrección: {fatal_error}")
+        sys.exit(0)
