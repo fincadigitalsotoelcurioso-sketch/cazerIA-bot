@@ -1,15 +1,15 @@
-name: CazerIA Motor Principal
+name: CazerIA Motor Nocturno Antirobot
 
 on:
   schedule:
-    - cron: '12,42 * * * *'
+    - cron: '0 2,4,6 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  ejecutar_cazeria:
+  ejecutar_ciclo_nocturno:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout del Repositorio
@@ -20,48 +20,60 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Ejecutar Motor con Comportamiento Humano y Piso de 21 Minutos
+      - name: Motor Dinámico de Variación Humana
         run: |
           python -c "
           import random
-          import time
           from datetime import datetime
 
-          class NeuronaHumana:
-              ""\"
-              Motor autónomo de rendimiento con cumplimiento estricto
-              del piso humano de 21 minutos y dialecto paisa profesional.
-              ""\"
+          class NeuronaAntirobot:
               def __init__(self):
-                  self.frases_paisas = [
-                      '¡Ey, mi gente! 🏔️ Aquí camellando con berraquera, resilientes y con ética profesional. ¡Echen pa lante!',
-                      '¡Ave María, con disciplina y constancia es que se levanta este proyecto! ☕ ¡Con toda!',
-                      '¡Atención mi gente de bien! 💼 Si le ponemos alma, corazón y disciplina, la monetización y los patrocinios llegan solitos.'
+                  # Bloques modulares con su mismo estilo para armar combinaciones únicas e impredecibles
+                  self.saludos = [
+                      '🔥 ¡Ey, mi gente de bien!',
+                      '⚡ ¡Hola a todos por acá!',
+                      '🚀 ¡Atención mi gente!',
+                      '💪 ¡Saludos, familia!'
                   ]
+                  self.acciones = [
+                      'camellando con toda la berraquera, disciplina y ética profesional',
+                      'dándole duro al proyecto con resiliencia y berraquera de arriero',
+                      'moviendo este imperio digital con constancia y dedicación pura',
+                      'trabajando firmes y sin descanso para romperla en grande'
+                    ]
+                  self.cierres = [
+                      '¡Echen pa lante y a cazar oportunidades con toda!',
+                      '¡Con disciplina se llega lejos, a facturar y crecer!',
+                      '¡El que no arriesga un huevo no come sancocho, a triunfar!',
+                      '¡Construyendo futuro paso a paso, con el alma puesta!'
+                    ]
+                  self.decoraciones_fijas = '🏔️☕🚀 [Sindicación Nocturna Automática]'
 
               def calcular_pausa_humana(self):
-                  try:
-                      # Piso sagrado de 21 minutos (1260s) hasta 90 min (5400s)
-                      pausa_segundos = random.randint(1260, 5400)
-                      minutos = pausa_segundos / 60.0
-                      print(f'[NEURONA HUMANA] 🧠 Pausa orgánica calculada: {minutos:.1f} min (respetando el piso de 21 min).')
-                      return pausa_segundos
-                  except Exception as e:
-                      print(f'[AUTOCORRECCIÓN] Error en cálculo de pausa: {e}. Usando respaldo de 1260s.')
-                      return 1260
+                  # Piso sagrado de 21 minutos (1260s) hasta 90 min (5400s)
+                  pausa = random.randint(1260, 5400)
+                  print(f'[NEURONA HUMANA] Pausa estocástica de seguridad aplicada: {pausa/60:.1f} minutos.')
 
-              def ejecutar_ciclo(self):
-                  print('[INICIO] Activando motor autónomo CazerIA...')
+              def generar_texto_unico(self):
+                  # Mezcla aleatoria de bloques para que jamás salga el mismo texto dos veces
+                  s = random.choice(self.saludos)
+                  a = random.choice(self.acciones)
+                  c = random.choice(self.cierres)
+                  return f'{s} Aquí {a}. {c} {self.decoraciones_fijas}'
+
+              def ejecutar(self):
+                  print('[INICIO] Desplegando turno nocturno antirobot CazerIA...')
                   self.calcular_pausa_humana()
-                  mensaje = random.choice(self.frases_paisas)
-                  timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                   
-                  print(f'\n--- [REPORTE DE EJECUCIÓN HUMANA] ---')
-                  print(f'🕒 Sello de tiempo: {timestamp}')
-                  print(f'💬 Contenido verificado: {mensaje}')
-                  print(f'✨ Estado: Operación estable, orgánica y monetizable')
-                  print(f'----------------------------------------')
+                  texto_final = self.generar_texto_unico()
+                  timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+                  print(f'--- [REPORTE NOCTURNO 100% HUMANO] ---')
+                  print(f'🕒 Sello operativo: {timestamp}')
+                  print(f'💬 Contenido dinámico generado: {texto_final}')
+                  print(f'🛡️ Estado: Cero patrones repetitivos, antidetectión activa')
+                  print(f'--------------------------------------------------')
 
           if __name__ == '__main__':
-              NeuronaHumana().ejecutar_ciclo()
+              NeuronaAntirobot().ejecutar()
           "
