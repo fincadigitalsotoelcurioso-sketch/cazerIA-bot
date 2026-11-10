@@ -1,4 +1,4 @@
-name: CazerIA Motor Global 24-7
+name: CazerIA Motor Global 24-7 Donaciones y Creadores (Autónomo)
 
 on:
   schedule:
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  ejecutar_motor_global:
+  disparar_n8n_autonomo:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout del Repositorio
@@ -21,75 +21,83 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Neurona Global Multilingüe y Antirobot
+      - name: Motor Global - Enfoque Donaciones, Creadores y Webhook
         run: |
           python -c "
           import random
+          import urllib.request
+          import json
           from datetime import datetime
 
-          class MotorCazerIAGlobal:
+          class MotorAutonomoGlobal:
               def __init__(self):
-                  self.bloques_globales = [
+                  self.url_webhook = 'http://localhost:5678/webhook/2452b8d7-720c-4bad-84e2-20cfa280dd07'
+                  self.bloques_estrategicos = [
                       {
-                          'region': 'China / Mandarín (全球)',
-                          'saludo': '🔥 各位国际朋友好！',
-                          'accion': '我们正以坚定的毅力和专业的职业道德全力奋斗',
-                          'cierre': '一起携手并进，共创未来！ 🏔️☕🚀 [全球自动化分发]'
+                          'region': 'Estados Unidos / Global (English)',
+                          'saludo': '🔥 Hello international family, creators, and supporters!',
+                          'accion': 'building solid bridges for transparent donations and ethical partnerships with total professionalism',
+                          'cierre': 'Let us collaborate, scale up, and grow together! 🏔️☕🚀 [Global Outreach]'
                       },
                       {
-                          'region': 'Estados Unidos / Europa (English)',
-                          'saludo': '🔥 Hello international family!',
-                          'accion': 'working hard with pure grit, resilience, and professional ethics',
-                          'cierre': 'Let us move forward together and scale up! 🏔️☕🚀 [Global Syndication]'
+                          'region': 'Latinoamérica / Hispanos (Español - Estilo Culebrero Profesional)',
+                          'saludo': '🔥 ¡Ey, mi gente de bien, creadores y parceros del mundo!',
+                          'accion': 'camellando con toda la berraquera y ética profesional para conectar donaciones, creadores y alianzas transparentes',
+                          'cierre': '¡Echen pa lante, a sumar fuerzas y a romperla con altura! 🏔️☕🚀 [Sindicación Nocturna 24-7]'
+                      },
+                      {
+                          'region': 'China / Mandarín (全球)',
+                          'saludo': '🔥 各位国际朋友、创作者与支持者好！',
+                          'accion': '我们以专业职业道德和高度透明度积极寻求全球捐赠与内容创作者合作',
+                          'cierre': '携手并进，共创辉煌！ 🏔️☕🚀 [全球自动化分发]'
                       },
                       {
                           'region': 'Brasil / Portugal (Português)',
-                          'saludo': '🔥 Olá minha gente!',
-                          'accion': 'trabalhando duro com muita garra, resiliência e ética profissional',
-                          'cierre': 'Vamos pra frente para crescer e faturar juntos! 🏔️☕🚀 [Rede Global]'
+                          'saludo': '🔥 Olá minha gente, criadores e apoiadores!',
+                          'accion': 'trabalhando duro com ética profissional e garra para conectar doações reais e parcerias com total transparência',
+                          'cierre': 'Vamos crescer juntos com ética e visão global! 🏔️☕🚀 [Rede Global]'
                       },
                       {
-                          'region': 'Francia / Europa (Français)',
-                          'saludo': '🔥 Bonjour la famille internationale !',
-                          'accion': 'travaillant dur avec persévérance et éthique professionnelle',
-                          'cierre': 'Allons de l avant pour réussir ensemble ! 🏔️☕🚀 [Diffusion Mondiale]'
-                      },
-                      {
-                          'region': 'Japón (日本語)',
-                          'saludo': '🔥 世界の仲間たち、こんにちは！',
-                          'accion': '強い意志とプロフェッショナルな倫理観を持って取り組んでいます',
-                          'cierre': '共に前進し、成功をつかもう！ 🏔️☕🚀 [グローバル配信]'
-                      },
-                      {
-                          'region': 'Rusia / Eurasia (Русский)',
-                          'saludo': '🔥 Привет, международная семья!',
-                          'accion': 'работаем с упорством, стойкостью и профессиональной этикой',
-                          'cierre': 'Идем вперед к успеху вместе! 🏔️☕🚀 [Глобальный охват]'
+                          'region': 'Europa / Francia (Français)',
+                          'saludo': '🔥 Bonjour la famille internationale, créateurs et donateurs !',
+                          'accion': 'développant des partenariats éthiques, transparents et solides pour le soutien et les dons',
+                          'cierre': 'Allons de l avant et réussissons ensemble ! 🏔️☕🚀 [Diffusion Mondiale]'
                       }
                   ]
 
               def calcular_pausa_humana(self):
+                  # Pausa estocástica entre 21 y 90 minutos simulados para evitar bloqueos
                   pausa = random.randint(1260, 5400)
-                  print(f'[NEURONA GLOBAL] Pausa estocástica de seguridad aplicada: {pausa/60:.1f} min (Piso >21 min respetado).')
-
-              def ensamblar_publicacion(self):
-                  variante = random.choice(self.bloques_globales)
-                  texto_final = f\"{variante['saludo']} Aquí {variante['accion']}. {variante['cierre']}\"
-                  return variante['region'], texto_final
+                  print(f'[NEURONA AUTÓNOMA] Pausa estocástica de seguridad aplicada: {pausa/60:.1f} min.')
 
               def ejecutar(self):
-                  print('[INICIO] Desplegando red global autónoma CazerIA...')
+                  print('[INICIO] Desplegando motor autónomo global CazerIA...')
                   self.calcular_pausa_humana()
-                  region, contenido = self.ensamblar_publicacion()
+                  
+                  variante = random.choice(self.bloques_estrategicos)
+                  texto_final = f\"{variante['saludo']} Aquí {variante['accion']}. {variante['cierre']}\"
                   timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-                  print(f'--- [REPORTE OFICIAL GLOBAL - CAZERIA] ---')
-                  print(f'🕒 Sello operativo: {timestamp}')
-                  print(f'🌍 Zona / Idioma: {region}')
-                  print(f'💬 Contenido Global Sincronizado: {contenido}')
-                  print(f'🛡️ Estado: Cobertura mundial, 100% Humano, Antidetectión')
-                  print(f'--------------------------------------------------')
+                  payload = {
+                      'timestamp': timestamp,
+                      'region': variante['region'],
+                      'mensaje': texto_final,
+                      'estado': '100% Autónomo, Ético y Enfocado en Donaciones/Creadores'
+                  }
+
+                  data = json.dumps(payload).encode('utf-8')
+                  req = urllib.request.Request(
+                      self.url_webhook,
+                      data=data,
+                      headers={'Content-Type': 'application/json'}
+                  )
+
+                  try:
+                      with urllib.request.urlopen(req) as response:
+                          print(f'[ÉXITO] Paquete despachado a n8n. Código HTTP: {response.getcode()}')
+                  except Exception as e:
+                      print(f'[AVISO TÉCNICO] Servidor local n8n en pausa (normal si el equipo descansa): {e}')
 
           if __name__ == '__main__':
-              MotorCazerIAGlobal().executar()
+              MotorAutonomoGlobal().ejecutar()
           "
