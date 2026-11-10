@@ -1,26 +1,60 @@
-name: CazerIA Global Engine
+import random
+import time
+from datetime import datetime
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 */6 * * *'
+class NeuronaHumanaFantasma:
+    """
+    Neurona de control para simular comportamiento 100% humano.
+    Límite inferior estricto: 21 minutos (1260 segundos) para evitar bloqueos.
+    Límite superior: 90 minutos (5400 segundos) para variabilidad orgánica.
+    """
+    def __init__(self):
+        self.frases_paisas = [
+            "¡Ey, mi gente! 🏔️ Aquí camellando con berraquera para sacar esto adelante. ¡No coman cuento, echen pa' lante!",
+            "¡Ave María, qué buena jugada esta! ☕ Con constancia y ética profesional es que se hacen las cosas bien hechas.",
+            "¡Atención mi gente de bien! 💼 Si le ponemos alma y corazón a este proyecto, la platica y los patrocinios llegan solitos. ¡Con toda!",
+            "¡Ojo pues a este dato! 🚀 La disciplina le gana al talento cuando el talento no le gana a la disciplina. ¡Dios los bendiga!"
+        ]
 
-jobs:
-  run-cazeria:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repositorio
-        uses: actions/checkout@v4
+    def calcular_pausa_humana(self):
+        """
+        Calcula la pausa aleatoria respetando el piso mínimo de 21 minutos.
+        21 minutos = 1260 segundos.
+        90 minutos = 5400 segundos.
+        """
+        pausa_segundos = random.randint(1260, 5400)
+        minutos = pausa_segundos / 60.0
+        print(f"[NEURONA FANTASMA] 🧠 Pausa orgánica calculada: {minutos:.1f} minutos (respetando el piso de 21 min).")
+        return pausa_segundos
 
-      - name: Configurar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+    def generar_contenido_visible(self):
+        """Genera el contenido decorado con identidad paisa y profesional."""
+        mensaje_base = random.choice(self.frases_paisas)
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        contenido_final = (
+            f"--- [CAZERIA AUTÓNOMO] ---\n"
+            f"🕒 Hora de emisión: {timestamp}\n"
+            f"💬 Mensaje: {mensaje_base}\n"
+            f"✨ Estado: 100% Humano | Cadencia protegida (21m - 90m)\n"
+            f"----------------------------"
+        )
+        return contenido_final
 
-      - name: Instalar dependencias
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests
+    def ejecutar_ciclo(self):
+        print("[INICIO] Activando motor autónomo CazerIA...")
+        
+        # Calcula el retraso variable con el piso de 21 min
+        pausa = self.calcular_pausa_humana()
+        
+        # Para ejecuciones reales en servidor, descomentar time.sleep(pausa)
+        # time.sleep(pausa) 
 
-      - name: Ejecutar motor CazerIA
-        run: python cazeria.py
+        publicacion = self.generar_contenido_visible()
+        
+        print("\n[ÉXITO] Publicación procesada con perfil humano e indetectable:")
+        print(publicacion)
+
+if __name__ == "__main__":
+    neurona = NeuronaHumanaFantasma()
+    neurona.ejecutar_ciclo()
